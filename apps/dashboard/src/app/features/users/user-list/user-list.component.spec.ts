@@ -37,17 +37,6 @@ describe('UserListComponent', () => {
     expect(usersApi.getUsers).toHaveBeenCalledWith(1, 10);
   });
 
-  it('paginatedRange should return 0-0 when total is 0', () => {
-    component.total.set(0);
-    expect(component.paginatedRange()).toBe('0-0');
-  });
-
-  it('paginatedRange should return range for page 0', () => {
-    component.total.set(25);
-    component.pageIndex.set(0);
-    expect(component.paginatedRange()).toBe('1-10');
-  });
-
   it('currentUserId should return auth user id', () => {
     (auth as any).user = () => ({ id: 'u1' });
     expect(component.currentUserId()).toBe('u1');

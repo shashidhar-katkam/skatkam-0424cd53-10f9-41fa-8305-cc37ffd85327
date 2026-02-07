@@ -23,13 +23,6 @@ export class RoleListComponent implements OnInit {
   readonly pageSize = PAGE_SIZE;
 
   totalPages = computed(() => Math.max(1, Math.ceil(this.total() / this.pageSize)));
-  paginatedRange = (): string => {
-    const tot = this.total();
-    if (tot === 0) return '0-0';
-    const start = this.pageIndex() * this.pageSize + 1;
-    const end = Math.min((this.pageIndex() + 1) * this.pageSize, tot);
-    return `${start}-${end}`;
-  };
 
   private destroyRef = inject(DestroyRef);
 

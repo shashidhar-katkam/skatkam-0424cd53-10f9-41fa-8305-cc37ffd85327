@@ -1,5 +1,6 @@
 import { Component, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { paginatedRange } from '../../utils/paginated-range';
 
 @Component({
   selector: 'app-pagination',
@@ -18,10 +19,8 @@ export class PaginationComponent {
 
   get rangeText(): string {
     const tot = this.total();
-    if (tot === 0) return 'Showing 0-0';
-    const start = this.pageIndex() * this.pageSize() + 1;
-    const end = Math.min((this.pageIndex() + 1) * this.pageSize(), tot);
-    return 'Showing ' + start + '-' + end + ' of ' + tot + ' ' + this.rangeLabel();
+    const range = paginatedRange(this.pageIndex(), this.pageSize(), tot);
+    return 'Showing ' + range + ' of ' + tot + ' ' + this.rangeLabel();
   }
 
   prev(): void {
