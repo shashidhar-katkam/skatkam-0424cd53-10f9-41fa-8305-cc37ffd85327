@@ -1,0 +1,62 @@
+<div class="page-layout">
+  <div class="page-layout__header">
+    <h1 class="page-title">Users</h1>
+    @if (canEdit()) {
+      <a routerLink="/users/new" class="btn-primary shrink-0">New user</a>
+    }
+  </div>
+
+  @if (loading()) {
+    <app-card class="mt-10">
+      <app-loading-block />
+    </app-card>
+  } @else if (total() === 0) {
+    <app-card class="mt-10">
+      <app-empty-state
+        message="No users yet."
+        [actionLabel]="canEdit() ? 'New user' : null"
+        [actionRoute]="canEdit() ? '/users/new' : null"
+      />
+    </app-card>
+  } @else {
+    <app-card class="mt-10">
+      <app-data-table
+        [showPagination]="totalPages() > 1"
+        [pageIndex]="pageIndex()"
+        [totalPages]="totalPages()"
+        [total]="total()"
+        [pageSize]="pageSize"
+        rangeLabel="user(s)"
+        (pageChange)="setPage($event)"
+      >
+        <ng-container tableHead>
+          <th class="table-header">Email</th>
+          <th class="table-header">Name</th>
+          <th class="table-header">Role</th>
+          @if (canEdit()) {
+            <th class="table-header text-right">Actions</th>
+          }
+        </ng-container>
+        <ng-container tableBody>
+          @for (u of users(); track u.id) {
+            <tr>
+              <td class="table-cell font-medium">{{ u.email }}</td>
+              <td class="table-cell">{{ u.name || '—' }}</td>
+              <td class="table-cell">{{ u.role.name || u.role.slug || '-' }}</td>
+              @if (canEdit()) {
+                <td class="table-cell text-right">
+                  <a [routerLink]="['/users', u.id, 'edit']" class="link-edit mr-4">Edit</a>
+                  @if (u.id !== currentUserId()) {
+                    <button type="button" (click)="deleteUser(u)" class="link-delete">Delete</button>
+                  } @else {
+                    <span class="text-muted text-sm">(you)</span>
+                  }
+                </td>
+              }
+            </tr>
+          }
+        </ng-container>
+      </app-data-table>
+    </app-card>
+  }
+</div>

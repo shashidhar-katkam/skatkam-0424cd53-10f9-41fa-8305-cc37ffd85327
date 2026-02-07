@@ -1,0 +1,15 @@
+.empty-state {
+  border: 1px dashed #cbd5e1;
+  border-radius: 0.5rem;
+  padding: 3rem 1rem;
+  text-align: center;
+}
+.empty-state__message {
+  color: #475569;
+}
+:host-context(.dark) .empty-state {
+  border-color: #475569;
+}
+:host-context(.dark) .empty-state__message {
+  color: #94a3b8;
+}

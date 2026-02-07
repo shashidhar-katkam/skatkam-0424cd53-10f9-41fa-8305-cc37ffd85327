@@ -1,0 +1,43 @@
+<div class="page-layout">
+  <div class="page-layout__header">
+    <h1 class="page-title">Audit log</h1>
+  </div>
+  @if (loading()) {
+    <app-card class="mt-10">
+      <app-loading-block />
+    </app-card>
+  } @else if (total() === 0) {
+    <app-card class="mt-10">
+      <app-empty-state message="No audit entries." />
+    </app-card>
+  } @else {
+    <app-card class="mt-10">
+      <app-data-table
+        [showPagination]="totalPages() > 1"
+        [pageIndex]="pageIndex()"
+        [totalPages]="totalPages()"
+        [total]="total()"
+        [pageSize]="pageSize"
+        rangeLabel="entry(ies)"
+        (pageChange)="setPage($event)"
+      >
+        <ng-container tableHead>
+          <th class="table-header">Time</th>
+          <th class="table-header">Action</th>
+          <th class="table-header">Resource</th>
+          <th class="table-header">Resource ID</th>
+        </ng-container>
+        <ng-container tableBody>
+          @for (e of entries(); track e.id) {
+            <tr>
+              <td class="table-cell">{{ e.timestamp }}</td>
+              <td class="table-cell font-medium">{{ e.action }}</td>
+              <td class="table-cell">{{ e.resource }}</td>
+              <td class="table-cell font-mono">{{ e.resourceId || '—' }}</td>
+            </tr>
+          }
+        </ng-container>
+      </app-data-table>
+    </app-card>
+  }
+</div>

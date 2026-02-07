@@ -1,0 +1,8 @@
+{
+  "moduleId": "permissions",
+  "moduleName": "Permissions Sync",
+  "description": "Sync permission structure from config to database",
+  "features": [
+    { "featureId": "sync", "featureName": "Sync Permissions", "description": "Run permission sync from JSON to DB", "defaultEnabled": false }
+  ]
+}

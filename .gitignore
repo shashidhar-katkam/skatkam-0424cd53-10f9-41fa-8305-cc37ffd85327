@@ -1,0 +1,62 @@
+# Dependencies
+node_modules/
+
+# Build and cache
+dist/
+.angular/
+.nx/cache
+.nx/workspace-data
+tmp/
+.turbo/
+*.tsbuildinfo
+
+# Environment and secrets (keep .env.example)
+.env
+.env.local
+.env.*.local
+.env.deploy
+!.env.example
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Test and coverage
+coverage/
+.nyc_output/
+*.lcov
+playwright-report/
+test-results/
+.playwright/
+
+# IDE and editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Optional: local NX daemon
+.nx/daemon
+
+# Optional: Angular cache (if not under .angular)
+.sass-cache/
+
+# Misc
+*.local
+.cache/
+
+# AWS deploy key (never commit)
+*.pem
+scripts
+deploy-ec2.sh
+deploy-package.zip

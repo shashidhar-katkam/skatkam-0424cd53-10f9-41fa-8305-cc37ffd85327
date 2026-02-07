@@ -1,0 +1,7 @@
+<div class="empty-state">
+  <p class="empty-state__message">{{ message() }}</p>
+  @if (actionLabel() && actionRoute()) {
+    <a [routerLink]="actionRoute()!" class="btn-primary mt-4 inline-flex">{{ actionLabel() }}</a>
+  }
+  <ng-content select="[emptyAction]"></ng-content>
+</div>

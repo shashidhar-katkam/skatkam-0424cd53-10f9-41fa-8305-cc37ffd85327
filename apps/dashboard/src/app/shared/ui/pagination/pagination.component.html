@@ -1,0 +1,8 @@
+<div class="pagination">
+  <p class="pagination__range">{{ rangeText }}</p>
+  <div class="pagination__controls">
+    <button type="button" class="btn-secondary py-2 text-sm disabled:opacity-50" [disabled]="pageIndex() <= 0" (click)="prev()">Previous</button>
+    <span class="pagination__page">Page {{ pageIndex() + 1 }} of {{ totalPages() }}</span>
+    <button type="button" class="btn-secondary py-2 text-sm disabled:opacity-50" [disabled]="pageIndex() >= totalPages() - 1" (click)="next()">Next</button>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-top: 1px solid #e2e8f0;
+  padding: 1rem 1.5rem;
+}
+.pagination__range,
+.pagination__page {
+  font-size: 0.875rem;
+  color: #475569;
+}
+.pagination__controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+:host-context(.dark) .pagination {
+  border-top-color: #334155;
+  background: rgba(30, 41, 59, 0.5);
+}
+:host-context(.dark) .pagination__range,
+:host-context(.dark) .pagination__page {
+  color: #94a3b8;
+}

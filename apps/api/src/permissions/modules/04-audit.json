@@ -1,0 +1,8 @@
+{
+  "moduleId": "audit",
+  "moduleName": "Audit Log",
+  "description": "View audit logs",
+  "features": [
+    { "featureId": "view", "featureName": "View Audit Log", "description": "View audit log entries", "defaultEnabled": false }
+  ]
+}

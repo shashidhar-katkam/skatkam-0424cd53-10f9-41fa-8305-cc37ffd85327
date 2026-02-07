@@ -1,0 +1,65 @@
+<div class="page-layout">
+  <div class="page-layout__header">
+    <h1 class="page-title">Roles</h1>
+    @if (canEdit()) {
+      <a routerLink="/roles/new" class="btn-primary shrink-0">New role</a>
+    }
+  </div>
+  @if (loading()) {
+    <app-card class="mt-10">
+      <app-loading-block />
+    </app-card>
+  } @else if (total() === 0) {
+    <app-card class="mt-10">
+      <app-empty-state
+        message="No roles yet."
+        [actionLabel]="canEdit() ? 'New role' : null"
+        [actionRoute]="canEdit() ? '/roles/new' : null"
+      />
+    </app-card>
+  } @else {
+    <app-card class="mt-10">
+      <app-data-table
+        [showPagination]="totalPages() > 1"
+        [pageIndex]="pageIndex()"
+        [totalPages]="totalPages()"
+        [total]="total()"
+        [pageSize]="pageSize"
+        rangeLabel="role(s)"
+        (pageChange)="setPage($event)"
+      >
+        <ng-container tableHead>
+          <th class="table-header">Name</th>
+          <th class="table-header">Slug</th>
+          <th class="table-header">Status</th>
+          <th class="table-header">Permissions</th>
+          @if (canEdit()) {
+            <th class="table-header text-right">Actions</th>
+          }
+        </ng-container>
+        <ng-container tableBody>
+          @for (r of roles(); track r.id) {
+            <tr>
+              <td class="table-cell font-medium">{{ r.name }}</td>
+              <td class="table-cell font-mono">{{ r.slug }}</td>
+              <td class="table-cell">
+                @if (r.isActive !== false) {
+                  <span class="badge badge-success">Active</span>
+                } @else {
+                  <span class="badge badge-neutral">Inactive</span>
+                }
+              </td>
+              <td class="table-cell">{{ permissionCount(r) }}</td>
+              @if (canEdit()) {
+                <td class="table-cell text-right">
+                  <a [routerLink]="['/roles', r.id, 'edit']" class="link-edit mr-4">Edit</a>
+                  <button type="button" (click)="deleteRole(r)" class="link-delete">Delete</button>
+                </td>
+              }
+            </tr>
+          }
+        </ng-container>
+      </app-data-table>
+    </app-card>
+  }
+</div>

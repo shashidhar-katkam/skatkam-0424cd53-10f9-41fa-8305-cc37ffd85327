@@ -1,0 +1,38 @@
+.page-layout {
+  margin: 0 auto;
+  max-width: 80rem;
+  padding: 2rem 1rem;
+}
+.page-layout__header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-bottom: 1.5rem;
+}
+.page-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+:host ::ng-deep .table-header {
+  background: #f8fafc;
+  padding: 1rem 1.5rem;
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #475569;
+}
+:host ::ng-deep .table-cell {
+  padding: 1rem 1.5rem;
+  font-size: 0.875rem;
+  color: #0f172a;
+}
+:host-context(.dark) ::ng-deep .table-header {
+  background: rgba(30, 41, 59, 0.8);
+  color: #94a3b8;
+}
+:host-context(.dark) ::ng-deep .table-cell {
+  color: #e2e8f0;
+}

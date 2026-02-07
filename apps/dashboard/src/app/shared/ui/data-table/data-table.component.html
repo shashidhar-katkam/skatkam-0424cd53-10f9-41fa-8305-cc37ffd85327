@@ -1,0 +1,24 @@
+<div class="data-table">
+  <div class="data-table__scroll">
+    <table class="data-table__table">
+      <thead>
+        <tr>
+          <ng-content select="[tableHead]"></ng-content>
+        </tr>
+      </thead>
+      <tbody class="data-table__body">
+        <ng-content select="[tableBody]"></ng-content>
+      </tbody>
+    </table>
+  </div>
+  @if (showPagination()) {
+    <app-pagination
+      [pageIndex]="pageIndex()"
+      [totalPages]="totalPages()"
+      [total]="total()"
+      [pageSize]="pageSize()"
+      [rangeLabel]="rangeLabel()"
+      (pageChange)="pageChange.emit($event)"
+    />
+  }
+</div>

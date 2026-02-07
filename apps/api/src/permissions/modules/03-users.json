@@ -1,0 +1,11 @@
+{
+  "moduleId": "users",
+  "moduleName": "User Management",
+  "description": "Manage users and their access",
+  "features": [
+    { "featureId": "view_users", "featureName": "View Users", "description": "View user list and details", "defaultEnabled": true },
+    { "featureId": "create_users", "featureName": "Create Users", "description": "Create new users", "defaultEnabled": false },
+    { "featureId": "update_users", "featureName": "Update Users", "description": "Edit user information", "defaultEnabled": false },
+    { "featureId": "delete_users", "featureName": "Delete Users", "description": "Delete users", "defaultEnabled": false }
+  ]
+}

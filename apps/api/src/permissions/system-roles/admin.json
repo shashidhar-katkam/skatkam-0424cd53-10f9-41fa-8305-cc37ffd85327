@@ -1,0 +1,20 @@
+{
+  "roleId": "admin",
+  "roleName": "Admin",
+  "description": "Full operational access (no permission sync)",
+  "defaultPermissions": [
+    "tasks.view",
+    "tasks.create",
+    "tasks.update",
+    "tasks.delete",
+    "roles.view_roles",
+    "roles.create_roles",
+    "roles.update_roles",
+    "roles.delete_roles",
+    "users.view_users",
+    "users.create_users",
+    "users.update_users",
+    "users.delete_users",
+    "audit.view"
+  ]
+}

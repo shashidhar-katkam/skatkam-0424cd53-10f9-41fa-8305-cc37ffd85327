@@ -1,0 +1,29 @@
+<div class="landing">
+  <header class="landing-header">
+    <div class="landing-header__inner">
+      <a routerLink="/" class="landing-logo">
+        <span class="landing-logo-icon">T</span>
+        Task Manager
+      </a>
+      <nav class="landing-nav">
+        <button type="button" (click)="theme.toggle()" class="landing-theme-btn" [attr.aria-label]="theme.isDark() ? 'Switch to light mode' : 'Switch to dark mode'">
+          @if (theme.isDark()) { <span class="text-lg">☀️</span> } @else { <span class="text-lg">🌙</span> }
+        </button>
+        <a routerLink="/login" class="landing-nav-link">Log in</a>
+        <a routerLink="/register" class="btn-primary rounded-lg px-5 py-2.5">Register</a>
+      </nav>
+    </div>
+  </header>
+  <main class="landing-main">
+    <div class="landing-hero">
+      <h1 class="landing-hero__title">Organize work.<br />Get things done.</h1>
+      <p class="landing-hero__text">
+        Task Manager helps your team track tasks, roles, and activity in one place. Register your organization and start in seconds.
+      </p>
+      <div class="landing-hero__actions">
+        <a routerLink="/register" class="btn-primary px-6 py-3 text-base">Get started</a>
+        <a routerLink="/login" class="btn-secondary px-6 py-3 text-base">Log in</a>
+      </div>
+    </div>
+  </main>
+</div>

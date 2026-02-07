@@ -1,0 +1,6 @@
+{
+  "roleId": "viewer",
+  "roleName": "Viewer",
+  "description": "View tasks only",
+  "defaultPermissions": ["tasks.view"]
+}

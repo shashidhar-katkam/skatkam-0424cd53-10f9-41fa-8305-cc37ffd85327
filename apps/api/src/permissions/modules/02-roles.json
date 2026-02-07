@@ -1,0 +1,11 @@
+{
+  "moduleId": "roles",
+  "moduleName": "Role Management",
+  "description": "Manage roles and permissions",
+  "features": [
+    { "featureId": "view_roles", "featureName": "View Roles", "description": "View role list and details", "defaultEnabled": true },
+    { "featureId": "create_roles", "featureName": "Create Roles", "description": "Create new roles", "defaultEnabled": false },
+    { "featureId": "update_roles", "featureName": "Update Roles", "description": "Edit role permissions", "defaultEnabled": false },
+    { "featureId": "delete_roles", "featureName": "Delete Roles", "description": "Delete roles", "defaultEnabled": false }
+  ]
+}

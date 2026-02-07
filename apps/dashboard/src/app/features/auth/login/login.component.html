@@ -1,0 +1,37 @@
+<div class="auth-page">
+  <button type="button" (click)="theme.toggle()" class="theme-btn" [attr.aria-label]="theme.isDark() ? 'Switch to light mode' : 'Switch to dark mode'">
+    @if (theme.isDark()) { <span class="text-lg">☀️</span> } @else { <span class="text-lg">🌙</span> }
+  </button>
+  <div class="card auth-card">
+    <div class="auth-card__inner">
+      <a routerLink="/" class="auth-back">← Back to home</a>
+      <h1 class="auth-title">Sign in</h1>
+      <p class="auth-subtitle">Task Management</p>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="auth-form">
+        <div>
+          <label class="form-label">Email <span class="required">*</span></label>
+          <input type="email" formControlName="email" class="input-field mt-1" placeholder="admin@example.com" />
+          @if (form.get('email')?.invalid && form.get('email')?.touched) {
+            <p class="form-error">Valid email required</p>
+          }
+        </div>
+        <div>
+          <label class="form-label">Password <span class="required">*</span></label>
+          <input type="password" formControlName="password" class="input-field mt-1" placeholder="••••••••" />
+          @if (form.get('password')?.invalid && form.get('password')?.touched) {
+            <p class="form-error">Min 6 characters</p>
+          }
+        </div>
+        @if (errorMessage) {
+          <div class="alert-error">{{ errorMessage }}</div>
+        }
+        <button type="submit" [disabled]="form.invalid || loading" class="btn-primary w-full py-3">
+          {{ loading ? 'Signing in...' : 'Sign in' }}
+        </button>
+      </form>
+      <p class="auth-footer">
+        Don't have an account? <a routerLink="/register" class="auth-link">Register your organization</a>
+      </p>
+    </div>
+  </div>
+</div>

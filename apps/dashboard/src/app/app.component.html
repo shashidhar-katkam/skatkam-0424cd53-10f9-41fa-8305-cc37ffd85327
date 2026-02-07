@@ -1,0 +1,130 @@
+@if (showLayout()) {
+  <div class="flex min-h-screen flex-col bg-slate-50 dark:bg-slate-900">
+    <header class="sticky top-0 z-40 border-b border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-800">
+      <div class="mx-auto flex h-14 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+        <a routerLink="/dashboard" (click)="closeMobileMenu()" class="flex items-center gap-2 font-semibold text-slate-900 dark:text-slate-100">
+          <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-600 text-white text-sm font-bold">T</span>
+          <span class="hidden sm:inline">Task Manager</span>
+        </a>
+
+        <!-- Desktop nav: visible from md up -->
+        <nav class="hidden items-center gap-0.5 md:flex">
+          @for (item of navItems(); track item.path) {
+            <a
+              [routerLink]="item.path"
+              routerLinkActive="bg-indigo-50 text-indigo-700 dark:bg-indigo-900/40 dark:text-indigo-300"
+              [routerLinkActiveOptions]="{ exact: item.path === '/dashboard' }"
+              class="rounded-md px-3 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-700 dark:hover:text-slate-100"
+            >{{ item.label }}</a>
+          }
+        </nav>
+
+        <!-- Right side: theme + user (desktop) or hamburger (mobile) -->
+        <div class="flex items-center gap-3">
+          <div class="hidden md:flex md:items-center md:gap-3">
+            <button
+              type="button"
+              (click)="theme.toggle()"
+              class="rounded-lg p-2 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-700 dark:text-slate-400 dark:hover:bg-slate-700 dark:hover:text-slate-200"
+              [attr.aria-label]="theme.isDark() ? 'Switch to light mode' : 'Switch to dark mode'"
+            >
+              @if (theme.isDark()) {
+                <span class="text-lg">☀️</span>
+              } @else {
+                <span class="text-lg">🌙</span>
+              }
+            </button>
+            @if (auth.user(); as u) {
+              <div class="hidden text-right sm:block">
+                @if (u.organizationName) {
+                  <p class="text-xs font-medium text-slate-500 dark:text-slate-400">{{ u.organizationName }}</p>
+                }
+                <p class="text-sm font-medium text-slate-800 dark:text-slate-200">{{ u.name || u.email }}</p>
+              </div>
+              <button
+                (click)="logout()"
+                class="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-700 shadow-sm transition-colors hover:bg-slate-50 hover:border-slate-300 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700 dark:hover:border-slate-500"
+              >Sign out</button>
+            }
+          </div>
+          <!-- Mobile: hamburger -->
+          <button
+            type="button"
+            (click)="toggleMobileMenu()"
+            class="rounded-lg p-2 text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-700 dark:text-slate-400 dark:hover:bg-slate-700 dark:hover:text-slate-200 md:hidden"
+            aria-label="Toggle menu"
+            [attr.aria-expanded]="mobileMenuOpen()"
+          >
+            @if (mobileMenuOpen()) {
+              <span class="text-xl" aria-hidden="true">✕</span>
+            } @else {
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            }
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile menu backdrop (tap outside to close) -->
+      @if (mobileMenuOpen()) {
+        <button
+          type="button"
+          (click)="closeMobileMenu()"
+          class="fixed inset-0 z-20 bg-slate-900/50 backdrop-blur-[2px] md:hidden"
+          aria-label="Close menu"
+        ></button>
+      }
+      <!-- Mobile menu panel -->
+      @if (mobileMenuOpen()) {
+        <div
+          class="absolute left-0 right-0 top-14 z-30 border-b border-slate-200 bg-white shadow-lg dark:border-slate-700 dark:bg-slate-800 md:hidden"
+          role="dialog"
+          aria-label="Navigation menu"
+        >
+          <nav class="flex flex-col gap-0.5 px-4 py-4">
+            @for (item of navItems(); track item.path) {
+              <a
+                [routerLink]="item.path"
+                (click)="closeMobileMenu()"
+                routerLinkActive="bg-indigo-50 text-indigo-700 dark:bg-indigo-900/40 dark:text-indigo-300"
+                [routerLinkActiveOptions]="{ exact: item.path === '/dashboard' }"
+                class="rounded-md px-3 py-3 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-700 dark:hover:text-slate-100"
+              >{{ item.label }}</a>
+            }
+          </nav>
+          <div class="flex flex-col gap-2 border-t border-slate-200 px-4 py-4 dark:border-slate-700">
+            <button
+              type="button"
+              (click)="theme.toggle()"
+              class="flex items-center gap-2 rounded-lg px-3 py-3 text-left text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-700"
+            >
+              @if (theme.isDark()) {
+                <span class="text-lg">☀️</span> Light mode
+              } @else {
+                <span class="text-lg">🌙</span> Dark mode
+              }
+            </button>
+            @if (auth.user(); as u) {
+              <div class="rounded-lg bg-slate-50 px-3 py-3 dark:bg-slate-700/50">
+                @if (u.organizationName) {
+                  <p class="text-xs font-medium text-slate-500 dark:text-slate-400">{{ u.organizationName }}</p>
+                }
+                <p class="text-sm font-medium text-slate-800 dark:text-slate-200">{{ u.name || u.email }}</p>
+              </div>
+              <button
+                (click)="logout(); closeMobileMenu()"
+                class="w-full rounded-lg border border-slate-200 bg-white px-3 py-3 text-sm font-medium text-slate-700 shadow-sm transition-colors hover:bg-slate-50 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700"
+              >Sign out</button>
+            }
+          </div>
+        </div>
+      }
+    </header>
+    <main class="flex-1 overflow-auto">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+} @else {
+  <router-outlet></router-outlet>
+}

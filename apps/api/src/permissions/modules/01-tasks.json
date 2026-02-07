@@ -1,0 +1,11 @@
+{
+  "moduleId": "tasks",
+  "moduleName": "Task Management",
+  "description": "Create, view, update and delete tasks",
+  "features": [
+    { "featureId": "view", "featureName": "View Tasks", "description": "View task list and details", "defaultEnabled": true },
+    { "featureId": "create", "featureName": "Create Tasks", "description": "Create new tasks", "defaultEnabled": false },
+    { "featureId": "update", "featureName": "Update Tasks", "description": "Edit tasks", "defaultEnabled": false },
+    { "featureId": "delete", "featureName": "Delete Tasks", "description": "Delete tasks", "defaultEnabled": false }
+  ]
+}
